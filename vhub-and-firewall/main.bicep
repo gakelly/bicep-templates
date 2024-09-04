@@ -13,7 +13,7 @@ param envId string = 'ths'
 param location string = resourceGroup().location
 
 @description('Size of the virtual machine.')
-param vmSize string = 'Standard_D2_v3'
+param vmSize string = 'Standard_B2s'
 
 param defaultTags object = {
   environment: envId
@@ -348,11 +348,11 @@ resource nsg_jump_srv 'Microsoft.Network/networkSecurityGroups@2021-08-01' = {
   properties: {
     securityRules: [
       {
-        name: 'RDP-SSH'
+        name: 'SSH'
         properties: {
           protocol: 'Tcp'
           sourcePortRange: '*'
-          destinationPortRange: '3389,22'
+          destinationPortRange: '22'
           sourceAddressPrefix: '*'
           destinationAddressPrefix: '*'
           access: 'Allow'
