@@ -241,6 +241,57 @@ resource Jump_Srv 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   }
 }
 
+resource policy_2 'Microsoft.Network/firewallPolicies@2021-08-01' = {
+  name: 'Test-${envId}-Policy-02'
+  location: location
+  tags: defaultTags
+  properties: {
+    threatIntelMode: 'Alert'
+  }
+}
+
+resource ruleCollectionGroup_2 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@2021-08-01' = {
+  parent: policy_2
+  name: 'DefaultApplicationRuleCollectionGroup'
+  properties: {
+    priority: 300
+    ruleCollections: [
+      {
+        ruleCollectionType: 'FirewallPolicyFilterRuleCollection'
+        name: 'RuleCollection-01'
+        priority: 100
+        action: {
+          type: 'Allow'
+        }
+        rules: [
+          {
+            ruleType: 'ApplicationRule'
+            name: 'Allow-msft'
+            sourceAddresses: [
+              '*'
+            ]
+            protocols: [
+              {
+                port: 80
+                protocolType: 'Http'
+              }
+              {
+                port: 443
+                protocolType: 'Https'
+              }
+            ]
+            targetFqdns: [
+              '*.microsoft.com'
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+
 resource Workload_Srv 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: 'Workload-Srv'
   location: location
