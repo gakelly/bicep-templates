@@ -1,0 +1,5 @@
+2+ vnets
+1 policy
+one vm
+one app service
+1 sec vhub
