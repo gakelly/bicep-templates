@@ -18,7 +18,7 @@ param vmSize string = 'Standard_B2s'
 param defaultTags object = {
   environment: envId
   owner: 'TechHub'
-  change: 'myProject'
+  change: 'Firewall-Test'
 }
 
 
