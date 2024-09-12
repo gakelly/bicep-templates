@@ -1,9 +1,9 @@
-@description('Admin username for the servers')
-param adminUsername string
+// @description('Admin username for the servers')
+// param adminUsername string
 
-@description('Password for the admin account on the servers')
-@secure()
-param adminPassword string
+// @description('Password for the admin account on the servers')
+// @secure()
+// param adminPassword string
 
 @description('Environemnt identifier')
 param envId string = 'ths'
